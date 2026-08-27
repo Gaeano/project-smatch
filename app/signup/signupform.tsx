@@ -52,9 +52,9 @@ export default function SignupForm() {
             <div className='flex flex-col gap-1.5 mb-4 relative'>
                 <label htmlFor='password' className='text-xs font-semibold text-gray-700'>Password</label>
                 <input type={showPassword ? "text" : "password"} id='password' placeholder='At least 8 characters'
-                className='p-2.5 bg-[#F9F9F8] border border-gray-200 rounded-md text-sm outline-none focus:border-green-700 focus:ring-1 focus:ring-green-700 transition-all'
+                className='p-2.5 pr-10 bg-[#F9F9F8] border border-gray-200 rounded-md text-sm outline-none focus:border-green-700 focus:ring-1 focus:ring-green-700 transition-all'
                 />
-                <button type='button' onClick={() => setShowPassword(!showPassword)} className='absolute right-3 top-[26px] text-gray-400 hover:text-gray-600'>
+                <button type='button' onClick={() => setShowPassword(!showPassword)} aria-label={showPassword ? "Hide password" : "Show password"} className='absolute right-3 top-[38px] text-gray-400 hover:text-gray-600'>
                     {showPassword ? <EyeOff size={16} /> : <Eye size={16} />}
                 </button>
             </div>
@@ -63,9 +63,9 @@ export default function SignupForm() {
             <div className='flex flex-col gap-1.5 mb-4 relative'>
                 <label htmlFor='confirmPassword' className='text-xs font-semibold text-gray-700'>Confirm Password</label>
                 <input type={showConfirmPassword ? "text" : "password"} id='confirmPassword' placeholder='Re-enter your password'
-                className='p-2.5 bg-[#F9F9F8] border border-gray-200 rounded-md text-sm outline-none focus:border-green-700 focus:ring-1 focus:ring-green-700 transition-all'
+                className='p-2.5 pr-10 bg-[#F9F9F8] border border-gray-200 rounded-md text-sm outline-none focus:border-green-700 focus:ring-1 focus:ring-green-700 transition-all'
                 />
-                <button type='button' onClick={() => setShowConfirmPassword(!showConfirmPassword)} className='absolute right-3 top-[26px] text-gray-400 hover:text-gray-600'>
+                <button type='button' onClick={() => setShowConfirmPassword(!showConfirmPassword)} aria-label={showConfirmPassword ? "Hide confirm password" : "Show confirm password"} className='absolute right-3 top-[38px] text-gray-400 hover:text-gray-600'>
                     {showConfirmPassword ? <EyeOff size={16} /> : <Eye size={16} />}
                 </button>
             </div>
@@ -74,7 +74,7 @@ export default function SignupForm() {
             <div className='flex items-start gap-2 mb-6'>
                 <input type='checkbox' id='terms' className='mt-1 w-4 h-4 text-green-700 border-gray-300 rounded focus:ring-green-700'
                 />
-                <label htmlFor='terms' className='text-xs '>
+                <label htmlFor='terms' className='flex text-center text-xs leading-relaxed'>
                     I agree to Smatch&apos;s Terms and <a href="#" className="text-green-700 font-medium">Terms of Service</a> and <a href="#" className="text-green-700 font-medium">Privacy Policy</a>.
                 </label>
             </div>
