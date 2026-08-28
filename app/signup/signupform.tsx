@@ -12,7 +12,7 @@ export default function SignupForm() {
         <form className='flex flex-col w-full'>
             <button type="button" className='w-full flex items-center justify-center gap-2 border border-gray-300 rounded-md py-2.5 text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-2 focus:outline-offset-2 transition-colors bg-[#FDFDFD]'>
                 <img src="https://www.svgrepo.com/show/475656/google-color.svg" alt="Google" className="w-4 h-4" />
-                Sign in with Google
+                Sign up with Google
             </button>
 
             <div className="flex items-center my-6">
@@ -72,14 +72,14 @@ export default function SignupForm() {
 
             {/* terms*/}
             <div className='flex items-start gap-2 mb-6'>
-                <input type='checkbox' id='terms' className='mt-1 w-4 h-4 text-green-700 border-gray-300 rounded focus:ring-green-700'
+                <input type='checkbox' id='terms' className='mt-1 w-4 h-4 accent-green-600 text-green-700 border-gray-300 rounded focus:ring-green-700 cursor-pointer'
                 />
-                <label htmlFor='terms' className='flex text-center text-xs leading-relaxed'>
-                    I agree to Smatch&apos;s Terms and <a href="#" className="text-green-700 font-medium">Terms of Service</a> and <a href="#" className="text-green-700 font-medium">Privacy Policy</a>.
+                <label htmlFor='terms' className='text-xs leading-relaxed'>
+                    I agree to Smatch&apos;s <a href="#" className="text-green-700 font-medium">Terms of Service</a> and <a href="#" className="text-green-700 font-medium">Privacy Policy</a>.
                 </label>
             </div>
 
-            <button type='submit' className='w-full flex items-center justify-center gap-2 bg-green-600 hover:bg-green-700 text-black font-bold py-3 rounded-md transition-colors'>
+            <button type='submit' className='w-full flex items-center justify-center gap-2 bg-green-600 hover:bg-green-700 text-white font-bold py-3 rounded-md transition-colors'>
                 <Check size={18} strokeWidth={3} />
                 Create account
             </button>

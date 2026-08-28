@@ -1,10 +1,18 @@
+import Link from 'next/link';
 import SignupForm from './signupform'
-import { Check, BarChart2, Zap } from 'lucide-react';
+import { Check, BarChart2, Zap, ArrowLeft } from 'lucide-react';
 
 export default function SignupPage() {
   return (
     <div className="flex min-h-screen bg-white">
         <div className="w-full lg:w-1/2 flex flex-col justify-center items-center p-8 lg:p-16">
+            <Link href="/" 
+              className="absolute top-8 left-8 flex items-center gap-2 text-s font-medium text-gray-500 hover:text-gray-900 transition-colors mb-8 w-fit">
+              <ArrowLeft size={22} />
+              Back to home
+            </Link>
+
+
             <div className="w-full max-w-md">
                 <h2 className="text-3xl font-black uppercase tracking-tight text-gray-900 mb-2">Create Your Account</h2>
                 <p className="text-sm text-gray-500 mb-8">Become a queue master. No credit card needed.</p>
@@ -13,19 +21,26 @@ export default function SignupPage() {
             </div>
         </div>
 
+        
+
         <div className="hidden lg:flex lg:w-1/2 bg-[#111111] text-white flex-col p-16 justify-center relative overflow-hidden">
+            <div
+              className="absolute inset-0 bg-[url('/signup-bg.jpg')] bg-cover bg-center opacity-50"
+              aria-hidden="true"
+            />
+            <div className="absolute inset-0 bg-[#111111]/30" aria-hidden="true" />
             <div className="absolute top-0 right-0 w-96 h-96 bg-green-900/10 rounded-full blur-3xl -z-0"></div>
         
-            <div className="z-10 max-w-lg">
+            <div className="relative z-10 max-w-lg">
                 <h1 className="text-6xl font-black leading-tight tracking-tighter uppercase mb-6">
                     Join the <br />
-                    <span className="text-yellow-400">Queue.</span> <br />
+                    <span className="text-green-600">Queue.</span> <br />
                     Run the <br />
                     Court.
                 </h1>
             
                 <p className="text-gray-400 text-lg mb-12">
-                    Create your account and run your first session in minutes. 
+                    Create your account and run your <span className="text-green-600">first session</span> in minutes. 
                     Your player registry and stats stay with you across every session.
                 </p>
 
@@ -48,6 +63,9 @@ export default function SignupPage() {
                 </div>
 
             </div>
+
+            <p className='absolute bottom-8 right-8 flex text-xs text-gray-700'>Photo by BWF</p>
+
         </div>
 
     </div>
@@ -61,7 +79,7 @@ function FeatureItem({ icon, title, desc }: { icon: React.ReactNode, title: stri
         {icon}
       </div>
       <div>
-        <h3 className="font-bold text-white text-sm">{title}</h3>
+        <h3 className="font-bold text-white text-lg">{title}</h3>
         <p className="text-sm text-gray-500 mt-1">{desc}</p>
       </div>
     </div>
