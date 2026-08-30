@@ -7,11 +7,12 @@ import Image from "next/image";
 export default function Home() {
 
   const images = [
-    "landing-page1.png",
-    "landing-page2.png",
-    "landing-page3.jpg",
-    "landing-page4.jpg",
-  ];
+  { src: "landing-page1.png", position: "60% 40%" }, // player center-right
+  { src: "landing-page2.png", position: "20% 45%" }, // player is left-of-frame
+  { src: "landing-page3.jpg", position: "45% 65%" }, // action low in frame
+  { src: "landing-page4.jpg", position: "32% 80%" }, // wide shot, court is bottom
+];
+
 
   const [currentIndex, setCurrentIndex] = useState(0);
 
@@ -26,17 +27,18 @@ export default function Home() {
   return (
     <main className="relative flex flex-col items-center justify-center min-h-screen text-white overflow-hidden scroll-smooth">
 
-      {images.map((src, index) =>
+      {images.map((img, index) =>
        (
           <Image
-            key={src}
-            src={`/${src}`}
+            key={img.src}
+            src={`/${img.src}`}
             alt={`Landing page ${index + 1}`}
             fill
+            style={{ objectPosition: img.position }}
             className={`absolute top-0 left-0 object-cover -z-20 transition-opacity duration-1000 ${index === currentIndex ? 'opacity-100' : 'opacity-0'}`}
             priority={index === 0}
             quality={100}
-            unoptimized={true}
+            sizes="100vw"
           />
       ))}
 
