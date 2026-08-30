@@ -79,7 +79,7 @@ export default function SignupForm() {
                 </label>
             </div>
 
-            <button type='submit' className='w-full flex items-center justify-center gap-2 bg-green-600 hover:bg-green-700 text-white font-bold py-3 rounded-md transition-colors'>
+            <button type='submit' className='w-full flex items-center justify-center gap-2 bg-primary-buttons hover:bg-hoverButtons text-white font-bold py-3 rounded-md transition-colors'>
                 <Check size={18} strokeWidth={3} />
                 Create account
             </button>

@@ -2,7 +2,7 @@
 
 :root {
   --background: #ffffff;
-  --foreground: #171717;
+  --foreground: #ffffff;
 }
 
 @theme inline {
@@ -11,6 +11,11 @@
   --font-sans: var(--font-inter);
   --font-mono: var(--font-inter);
   --font-bebas: var(--font-bebas-neue);
+}
+
+@theme{
+  --color-primary-buttons: #008235;
+  --color-hoverButtons: #0D530E;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -29,3 +34,4 @@ input[type="password"]::-ms-reveal,
 input[type="password"]::-ms-clear {
   display: none;
 }
+
