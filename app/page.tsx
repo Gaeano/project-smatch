@@ -134,13 +134,18 @@ export default function Home() {
       </section>
 
       <section id="features" className="min-h-screen w-full bg-black flex flex-col items-center text-black p-8 justify-center">
-        <div className="w-full max-w-4xl mb-8">
-          <h2 className="text-center text-lg sm:text-xl md:text-2xl lg:text-3xl leading-relaxed text-white font-semibold font-inter">
+       <div className="w-full max-w-4xl mb-8">
+          <p className="text-center text-lg sm:text-xl md:text-2xl lg:text-3xl leading-relaxed text-white font-semibold font-inter">
             Smatch is an automated queueing and matchmaking system specifically designed for badminton sessions. The primary goal of the platform is to eliminate the manual overhead of managing active courts, removing the need to manually track who is next in line, who is adequately rested, and who has already played whom.
-          </h2>
+          </p>
         </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 max-w-6xl w-full lg:mt-10">
+      <div className="w-full flex flex-col items-center mb-10">
+        <h2 className="text-2xl text-green-400 uppercase ">Features</h2>
+        <div className="w-300 h-px bg-gray-500/40 rounded-full mt-3" />
+      </div>
+
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 max-w-6xl w-full">
           {features.map((feature) => (
             <FeatureItem
               key={feature.title}
