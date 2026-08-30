@@ -11,11 +11,13 @@
   --font-sans: var(--font-inter);
   --font-mono: var(--font-inter);
   --font-bebas: var(--font-bebas-neue);
+  --font-inter: var(--font-inter);
 }
 
 @theme{
   --color-primary-buttons: #008235;
   --color-hoverButtons: #0D530E;
+  --color-background: #FBF5DD;
 }
 
 @media (prefers-color-scheme: dark) {
