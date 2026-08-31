@@ -2,7 +2,7 @@
 import Link from "next/link";
 import { useState, useEffect } from "react";
 import Image from "next/image";
-import { Radio, Brain, Award, Sparkles } from "lucide-react"; // swapped invalid icons
+import { Brain, Hand, Timer, Trophy, Clock, Repeat, ArrowUp } from "lucide-react";
 
 type Feature = { title: string; desc: string; icon: React.ReactNode };
 
@@ -14,10 +14,36 @@ const images = [
 ];
 
 const features: Feature[] = [
-  { title: "Live Queue", desc: "See who's up next without asking around.", icon: <Radio className="w-10 h-10 text-green-500" /> },
-  { title: "Smart Matchmaking", desc: "Automatically pair players based on skill and rest time.", icon: <Brain className="w-10 h-10 text-green-500" /> },
-  { title: "Hybrid Rating Mode", desc: "Pair players of different skill tiers using a hidden MMR-style rating system.", icon: <Award className="w-10 h-10 text-green-500" /> },
-  { title: "Queue Fallback", desc: "Automatically advances the queue if the Queue Master is currently playing a match.", icon: <Sparkles className="w-10 h-10 text-green-500" /> },
+  {
+    title: "Automated Matchmaking",
+    desc: "Forms balanced matches automatically based on rest time, games played, and skill.",
+    icon: <Brain className="w-10 h-10 text-green-500" />,
+  },
+  {
+    title: "Manual Matchmaking",
+    desc: "Hand-pick who plays who whenever you want to bypass the queue.",
+    icon: <Hand className="w-10 h-10 text-green-500" />,
+  },
+  {
+    title: "Match Timer",
+    desc: "Tracks how long each match has been running, per court.",
+    icon: <Timer className="w-10 h-10 text-green-500" />,
+  },
+  {
+    title: "Leaderboard",
+    desc: "Wins, losses, win rate, and performance rating — updated automatically.",
+    icon: <Trophy className="w-10 h-10 text-green-500" />,
+  },
+  {
+    title: "Resting Time Tracking",
+    desc: "Keeps rest time factored into every matchmaking decision, automatically.",
+    icon: <Clock className="w-10 h-10 text-green-500" />,
+  },
+  {
+    title: "Automated Queue Fallback",
+    desc: "Keeps the queue moving even when the queue master is mid-match.",
+    icon: <Repeat className="w-10 h-10 text-green-500" />,
+  },
 ];
 
 function FeatureItem({ icon, title, onClick }: { icon: React.ReactNode; title: string; onClick: () => void }) {
@@ -100,6 +126,7 @@ export default function Home() {
   const handleScroll = (e: React.MouseEvent<HTMLAnchorElement>) => {
     e.preventDefault();
     document.getElementById("features")?.scrollIntoView({ behavior: "smooth" });
+    document.getElementById("section-one")?.scrollIntoView({behavior: "smooth"});
   };
 
   return (
@@ -121,7 +148,7 @@ export default function Home() {
         <div className="absolute inset-0 bg-black/40" />
       </div>
 
-      <section className="relative flex flex-col z-10 items-center justify-center text-center min-h-screen w-full">
+      <section id="section-one" className="relative flex flex-col z-10 items-center justify-center text-center min-h-screen w-full">
         <h1 className="text-5xl lg:text-9xl font-black mb-6 uppercase tracking-tight text-white font-bebas">Smatch</h1>
         <div id="buttons" className="flex flex-col sm:flex-row gap-4 p-1">
           <Link href="/signup" className="px-6 py-3 bg-primary-buttons text-white font-bold rounded-lg hover:bg-hoverButtons transition-colors font-inter">
@@ -141,7 +168,7 @@ export default function Home() {
         </div>
 
       <div className="w-full flex flex-col items-center mb-10">
-        <h2 className="text-2xl text-green-400 uppercase ">Features</h2>
+        <h2 className="text-2xl text-green-400 uppercase font-bold">Features</h2>
         <div className="w-300 h-px bg-gray-500/40 rounded-full mt-3" />
       </div>
 
@@ -160,6 +187,13 @@ export default function Home() {
           <FeatureModal feature={selectedFeature} isOpen={isModalOpen} onClose={closeModal} />
         )}
       </section>
+
+      <a href="#section-one" onClick={handleScroll} className="fixed bottom-8 right-8 p-4 rounded-full border-zinc-800 border-2 hover:-translate-y-1 cursor-pointer hover:transition-transform hover:bg-zinc-700/40">
+        <ArrowUp className="text-white w-6 h-6" />
+        
+      </a>
+
+
     </main>
   );
 }
