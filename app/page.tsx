@@ -161,34 +161,49 @@ export default function Home() {
       </section>
 
       <section id="features" className="min-h-screen w-full bg-black flex flex-col items-center text-black p-8 justify-center">
-       <div className="w-full max-w-4xl mb-8">
-          <p className="text-center text-lg sm:text-xl md:text-2xl lg:text-3xl leading-relaxed text-white font-semibold font-inter">
-            Smatch is an automated queueing and matchmaking system specifically designed for badminton sessions. The primary goal of the platform is to eliminate the manual overhead of managing active courts, removing the need to manually track who is next in line, who is adequately rested, and who has already played whom.
-          </p>
+       <div className="max-w-7xl w-full grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+          <div>
+            <p className="text-center text-lg md:text-2xl leading-relaxed text-white font-semibold font-inter mb-6">
+                Smatch is an automated queueing and matchmaking system specifically designed for badminton sessions. It eliminates the manual overhead of managing active courts by automatically tracking:
+            </p>
+            
+            <ul className="text-left text-lg md:text-xl text-gray-300 font-medium space-y-3 list-disc pl-6 marker:text-green-500">
+              <li>Who is next in line.</li>
+              <li>Who is adequately rested.</li>
+              <li>Who has already played whom.</li>
+            </ul>
+
+          </div>
+          
+          <div className="flex flex-col items-center justify-center gap-3">
+            <h2 className="text-2xl text-green-400 uppercase font-bold">Features</h2>
+            {/* line */}
+            <div className="w-150 h-px bg-gray-500/40 rounded-full mt-3" />  
+
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 max-w-6xl w-full">
+            {features.map((feature) => (
+              <FeatureItem
+                key={feature.title}
+                icon={feature.icon}
+                title={feature.title}
+                onClick={() => openModal(feature)}
+              />
+            ))}
+
+           </div>
+
         </div>
 
-      <div className="w-full flex flex-col items-center mb-10">
-        <h2 className="text-2xl text-green-400 uppercase font-bold">Features</h2>
-        <div className="w-300 h-px bg-gray-500/40 rounded-full mt-3" />
       </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 max-w-6xl w-full">
-          {features.map((feature) => (
-            <FeatureItem
-              key={feature.title}
-              icon={feature.icon}
-              title={feature.title}
-              onClick={() => openModal(feature)}
-            />
-          ))}
-        </div>
+  
 
         {selectedFeature && (
           <FeatureModal feature={selectedFeature} isOpen={isModalOpen} onClose={closeModal} />
         )}
       </section>
 
-      <a href="#section-one" onClick={handleScroll} className="fixed bottom-8 right-8 p-4 rounded-full border-zinc-800 border-2 hover:-translate-y-1 cursor-pointer hover:transition-transform hover:bg-zinc-700/40">
+      <a href="#section-one" onClick={handleScroll} className=" absolute bottom-6 right-6 lg:bottom-8 lg:right-8 lg:p-4 p-3 rounded-full border-zinc-800 border-2 hover:-translate-y-1 cursor-pointer hover:transition-transform hover:bg-zinc-700/40">
         <ArrowUp className="text-white w-6 h-6" />
         
       </a>
