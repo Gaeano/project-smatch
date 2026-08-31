@@ -18,6 +18,7 @@
   --color-primary-buttons: #008235;
   --color-hoverButtons: #0D530E;
   --color-background: #FBF5DD;
+  --color-navbarBackground: #306D29;
 }
 
 @media (prefers-color-scheme: dark) {

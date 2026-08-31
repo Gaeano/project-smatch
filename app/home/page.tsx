@@ -1,8 +1,10 @@
 import Link from "next/link";
+import {Navbar} from "@/src/components/layout/navbar";
 
 export default function HomePage() {
   return (
-    <main className="flex min-h-screen flex-col items-center justify-center gap-6 bg-neutral-950 px-6 text-center text-white">
+    <main className="flex min-h-screen flex-col items-center gap-6 text-center text-black">
+      <Navbar />
       <h1 className="text-4xl font-black uppercase tracking-tight">Home</h1>
       <p className="max-w-md text-sm text-neutral-400">
         This route is now wired up so the app can build cleanly.
