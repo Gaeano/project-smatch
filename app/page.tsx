@@ -189,6 +189,7 @@ export default function Home() {
 
       </section>
 
+      {/* TODO: improve style */}
       <section id="features" className="min-h-screen w-full bg-white flex flex-col items-center text-black p-8 justify-center">
        <div className="max-w-7xl w-full grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
           <div>

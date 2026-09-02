@@ -49,7 +49,7 @@ export default function LoginForm() {
             <div className='flex items-start gap-2 mb-6'>
                 <input type='checkbox' id='terms' className='mt-1 w-4 h-4 accent-green-600 text-green-700 border-gray-300 rounded focus:ring-green-700 cursor-pointer'
                 />
-                <label htmlFor='terms' className='text-xs leading-relaxed'>
+                <label htmlFor='terms' className='text-xs leading-relaxed text-gray-700'>
                     Keep me signed in
                 </label>
             </div>
