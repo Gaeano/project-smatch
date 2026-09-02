@@ -3,13 +3,63 @@
 
 import { useState } from 'react';
 import { Eye, EyeOff, Check } from 'lucide-react';
+import { SignupEmail } from './signup-logic';
+import { redirect } from 'next/navigation';
+
+function CheckPasswordmatch(password: string, confirmPassword: string): boolean {
+    return password === confirmPassword;
+}
 
 export default function SignupForm() {
     const [showPassword, setShowPassword] = useState(false);
     const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+    const [firstName, setFirstName] = useState('');
+    const [lastName, setLastName] = useState('');
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
+    const [confirmPassword, setConfirmPassword] = useState('');
+
+    const [isSubmitting, setIsSubmitting] = useState(false);
+    const [submitError, setSubmitError] = useState('');
+
+    const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+        e.preventDefault();
+        setIsSubmitting(true);
+        setSubmitError('');
+
+        const {error} = await SignupEmail(email, password, firstName, lastName);
+
+        setIsSubmitting(false);
+
+        if(error){
+            setSubmitError(error.message);
+            return;
+        }
+
+        redirect('home');
+
+    };
+
+
+    const checkValidationError = () => {
+        if (!firstName || !lastName || !email || !password || !confirmPassword) {
+            return 'Please fill in all required fields.';
+        }
+
+        if (password.length < 8) {
+            return 'Password must be at least 8 characters long.';
+        }
+
+        if (!CheckPasswordmatch(password, confirmPassword)) {
+            return 'Passwords do not match.';
+        }
+        return '';
+    }
+
+    const validationError = checkValidationError();
 
     return (
-        <form className='flex flex-col w-full'>
+        <form className='flex flex-col w-full' onSubmit={handleSubmit}>
             <button type="button" className='w-full flex items-center justify-center gap-2 border border-gray-300 rounded-md py-2.5 text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-2 focus:outline-offset-2 transition-colors bg-[#FDFDFD]'>
                 <img src="https://www.svgrepo.com/show/475656/google-color.svg" alt="Google" className="w-4 h-4" />
                 Sign up with Google
@@ -25,7 +75,7 @@ export default function SignupForm() {
                 {/* first name*/}
                 <div className='flex flex-col gap-1.5 w-1/2'>
                     <label htmlFor='firstName' className='text-xs font-semibold text-gray-700'>First Name</label>
-                    <input type='text' id='firstName' placeholder='e.g. Juan'
+                    <input type='text' id='firstName' placeholder='e.g. Juan' value={firstName} onChange={(e) => setFirstName(e.target.value)}
                     className='p-2.5 bg-[#F9F9F8] border border-gray-200 rounded-md text-sm outline-none focus:border-green-700 focus:ring-1 focus:ring-green-700 transition-all'
                     />
 
@@ -34,7 +84,7 @@ export default function SignupForm() {
                 {/* lname*/}
                 <div className='flex flex-col gap-1.5 w-1/2'>
                     <label htmlFor='lastName' className='text-xs font-semibold text-gray-700'>Last Name</label>
-                    <input type='text' id='lastName' placeholder='e.g. Dela Cruz'
+                    <input type='text' id='lastName' placeholder='e.g. Dela Cruz' value={lastName} onChange={(e) => setLastName(e.target.value)}
                     className='p-2.5 bg-[#F9F9F8] border border-gray-200 rounded-md text-sm outline-none focus:border-green-700 focus:ring-1 focus:ring-green-700 transition-all'
                     />
                 </div>
@@ -43,7 +93,7 @@ export default function SignupForm() {
             {/* email*/}
             <div className='flex flex-col gap-1.5 mb-4'>
                 <label htmlFor='email' className='text-xs font-semibold text-gray-700'>Email</label>
-                <input type='text' id='email' placeholder='e.g. you@email.com'
+                <input type='text' id='email' placeholder='e.g. you@email.com' value={email} onChange={(e) => setEmail(e.target.value)}
                 className='p-2.5 bg-[#F9F9F8] border border-gray-200 rounded-md text-sm outline-none focus:border-green-700 focus:ring-1 focus:ring-green-700 transition-all'
                 />
             </div>
@@ -51,7 +101,7 @@ export default function SignupForm() {
             {/* pass*/}
             <div className='flex flex-col gap-1.5 mb-4 relative'>
                 <label htmlFor='password' className='text-xs font-semibold text-gray-700'>Password</label>
-                <input type={showPassword ? "text" : "password"} id='password' placeholder='At least 8 characters'
+                <input type={showPassword ? "text" : "password"} id='password' placeholder='At least 8 characters' value={password} onChange={(e) => setPassword(e.target.value)}
                 className='p-2.5 pr-10 bg-[#F9F9F8] border border-gray-200 rounded-md text-sm outline-none focus:border-green-700 focus:ring-1 focus:ring-green-700 transition-all'
                 />
                 <button type='button' onClick={() => setShowPassword(!showPassword)} aria-label={showPassword ? "Hide password" : "Show password"} className='absolute right-3 top-[38px] text-gray-400 hover:text-gray-600'>
@@ -62,7 +112,7 @@ export default function SignupForm() {
             {/* confirm pass*/}
             <div className='flex flex-col gap-1.5 mb-4 relative'>
                 <label htmlFor='confirmPassword' className='text-xs font-semibold text-gray-700'>Confirm Password</label>
-                <input type={showConfirmPassword ? "text" : "password"} id='confirmPassword' placeholder='Re-enter your password'
+                <input type={showConfirmPassword ? "text" : "password"} id='confirmPassword' placeholder='Re-enter your password' value={confirmPassword} onChange={(e) => setConfirmPassword(e.target.value)}
                 className='p-2.5 pr-10 bg-[#F9F9F8] border border-gray-200 rounded-md text-sm outline-none focus:border-green-700 focus:ring-1 focus:ring-green-700 transition-all'
                 />
                 <button type='button' onClick={() => setShowConfirmPassword(!showConfirmPassword)} aria-label={showConfirmPassword ? "Hide confirm password" : "Show confirm password"} className='absolute right-3 top-[38px] text-gray-400 hover:text-gray-600'>
@@ -79,10 +129,29 @@ export default function SignupForm() {
                 </label>
             </div>
 
-            <button type="submit"className='w-full flex items-center justify-center gap-2 bg-primary-buttons hover:bg-hoverButtons text-white font-bold py-3 rounded-md transition-colors'>
+           <button 
+                type="submit"
+                disabled={Boolean(validationError) || password === '' || confirmPassword === '' || isSubmitting}
+                className={`w-full flex items-center justify-center gap-2 bg-primary-buttons hover:bg-hoverButtons text-white font-bold py-3 rounded-md transition-colors ${
+                    (validationError || password === '' || confirmPassword === '' || isSubmitting) ? 'opacity-50 cursor-not-allowed' : ''
+                }`}
+            >
                 <Check size={18} strokeWidth={3} />
                 Create account
             </button>
+
+            {/* error messages */}
+            {validationError && (
+                <p className="text-center text-sm text-red-500 mt-2">
+                    {validationError}
+                </p>
+            )}
+
+            {submitError && (
+                <p className="text-center text-sm text-red-500 mt-2">
+                    {submitError}
+                </p>
+            )}
 
             <p className="text-center text-sm text-gray-500 mt-6">
                 Already have an account? <a href="/login" className="font-bold text-green-700 hover:underline">Sign in instead</a>
