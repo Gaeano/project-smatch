@@ -2,7 +2,7 @@
 import Link from "next/link";
 import { useState, useEffect } from "react";
 import Image from "next/image";
-import { Brain, Hand, Timer, Trophy, Clock, Repeat, ArrowUp } from "lucide-react";
+import { Brain, Hand, Timer, Trophy, Clock, Repeat, ArrowUp, MoveRight } from "lucide-react";
 
 type Feature = { title: string; desc: string; icon: React.ReactNode };
 
@@ -53,7 +53,7 @@ function FeatureItem({ icon, title, onClick }: { icon: React.ReactNode; title: s
       className="flex flex-col items-center gap-4 p-4 rounded-lg hover:scale-105 transition-transform duration-300 hover:bg-white/15 text-left"
     >
       <div className="flex-shrink-0">{icon}</div>
-      <h3 className="text-lg font-semibold text-white">{title}</h3>
+      <h3 className="text-lg font-semibold text-black">{title}</h3>
     </button>
   );
 }
@@ -131,6 +131,7 @@ export default function Home() {
 
   return (
     <main className="relative min-h-screen text-white overflow-x-hidden scroll-smooth">
+
       <div className="fixed top-0 left-0 w-full h-screen -z-20">
         {images.map((img, index) => (
           <Image
@@ -145,29 +146,57 @@ export default function Home() {
             sizes="100vw"
           />
         ))}
-        <div className="absolute inset-0 bg-black/40" />
+        <div className="absolute inset-0 bg-black/85" />
       </div>
 
-      <section id="section-one" className="relative flex flex-col z-10 items-center justify-center text-center min-h-screen w-full">
-        <h1 className="text-5xl lg:text-9xl font-black mb-6 uppercase tracking-tight text-white font-bebas">Smatch</h1>
-        <div id="buttons" className="flex flex-col sm:flex-row gap-4 p-1">
-          <Link href="/signup" className="px-6 py-3 bg-primary-buttons text-white font-bold rounded-lg hover:bg-hoverButtons transition-colors font-inter">
-            Get Started
-          </Link>
-          <a href="#features" onClick={handleScroll} className="px-6 py-3 bg-primary-buttons text-white font-bold rounded-lg hover:bg-hoverButtons transition-colors">
-            Learn More
-          </a>
+
+      <nav className="absolute top-0 w-full flex justify-between items-center px-8 lg:px-24 py-10 z-50 border-b border-[#008235]/50">
+        <div className="font-bebas text-3xl tracking-widest text-[#F4F4F0]">SMATCH</div>
+        <div className="flex items-center gap-8 text-[11px] font-bold tracking-[0.2em] uppercase text-gray-400">
+            <a href="#features" onClick={handleScroll} className="hover:text-white transition-colors hidden sm:block">
+                How it works
+            </a>
+
+            <Link href="/signup" className="border border-white/20 px-8 py-3 text-white hover:bg-green-600 hover:text-white transition-all">
+                Get started
+            </Link>
         </div>
+      </nav>
+
+      <section id="section-one" className="relative flex flex-col justify-center min-h-screen w-full px-8 lg:px-24 pt-20">
+
+        <div className="absolute top-1/2 left-0 -translate-y-1/2 w-full overflow-hidden flex justify-center pointer-events-none opacity-5 select-none -z-10">
+          <span className="text-[25vw] font-bebas leading-none text-white tracking-tighter">SMATCH</span>
+        </div>
+
+        <div className="max-w-5xl z-10">
+          <h1 className="sm:text-[10vw] lg:text-[130px] font-medium leading-[0.85] tracking-tighter text-[#F4F4F0] mb-12">
+            <span className="italic font-serif font-light pr-4 text-[6vw]">project</span> <br />
+            <span className="font-bebas text-[12vw] ">SMATCH</span>
+          </h1>
+
+          <p className="text-gray-400 text-lg md:text-xl max-w-lg mb-12 leading-relaxed font-light">
+            Smart automated queueing system designed for <span className="text-[#008235] font-bold">badminton players</span>.
+          </p>
+
+          <Link href="/signup" className="inline-flex items-center gap-4 border border-[#008235] px-8 py-4 text-[#F4F4F0] hover:bg-green-600 transition-all text-xs font-bold tracking-[0.2em] uppercase">
+            Get Started <MoveRight className="w-6 h-6" />
+          </Link>
+
+        </div>
+
+        <div className="absolute bottom-8 right-8 lg:bottom-12 lg:right-12 text-[10px] sm:text-xs text-gray-600 font-inter tracking-[0.2em] z-10">PHOTOS BY BWF</div>
+
       </section>
 
-      <section id="features" className="min-h-screen w-full bg-black flex flex-col items-center text-black p-8 justify-center">
+      <section id="features" className="min-h-screen w-full bg-white flex flex-col items-center text-black p-8 justify-center">
        <div className="max-w-7xl w-full grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
           <div>
-            <p className="text-center text-lg md:text-2xl leading-relaxed text-white font-semibold font-inter mb-6">
+            <p className="text-center text-lg md:text-2xl leading-relaxed text-black font-semibold font-inter mb-6">
                 Smatch is an automated queueing and matchmaking system specifically designed for badminton sessions. It eliminates the manual overhead of managing active courts by automatically tracking:
             </p>
             
-            <ul className="text-left text-lg md:text-xl text-gray-300 font-medium space-y-3 list-disc pl-6 marker:text-green-500">
+            <ul className="text-left text-lg md:text-xl text-black font-medium space-y-3 list-disc pl-6 marker:text-green-500">
               <li>Who is next in line.</li>
               <li>Who is adequately rested.</li>
               <li>Who has already played whom.</li>
@@ -203,9 +232,9 @@ export default function Home() {
         )}
       </section>
 
-      <a href="#section-one" onClick={handleScroll} className=" absolute bottom-6 right-6 lg:bottom-8 lg:right-8 lg:p-4 p-3 rounded-full border-zinc-800 border-2 hover:-translate-y-1 cursor-pointer hover:transition-transform hover:bg-zinc-700/40">
-        <ArrowUp className="text-white w-6 h-6" />
-        
+      {/* TODO: Make button dynamic by making it only appear when user is scrolling down and not positioning it statically at the bottom */}
+      <a href="#section-one" onClick={handleScroll} className=" absolute bottom-6 right-6 lg:bottom-8 lg:right-8 lg:p-4 p-3 rounded-full border-[#008235] border-2 hover:-translate-y-1 cursor-pointer hover:transition-transform hover:bg-zinc-700/40">
+        <ArrowUp className="text-[#008235] w-6 h-6" />
       </a>
 
 
