@@ -3,6 +3,7 @@ import Link from "next/link";
 import { useState, useEffect } from "react";
 import Image from "next/image";
 import { Brain, Users, Trophy, Clock, Repeat, ArrowUp, MoveRight, X, Plus, Minus } from "lucide-react";
+import Footer from "./components/Footer";
 
 type Feature = { title: string; desc: string; icon: React.ReactNode, span?: string; highlight?: boolean; };
 
@@ -412,6 +413,8 @@ export default function Home() {
       >
         <ArrowUp className="text-[#008235] w-6 h-6 group-hover:text-white transition-all duration-300" />
       </a>
+
+      <Footer />
 
     </main>
   );
