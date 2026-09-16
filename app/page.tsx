@@ -3,7 +3,7 @@ import Link from "next/link";
 import { useState, useEffect } from "react";
 import Image from "next/image";
 import { Brain, Users, Trophy, Clock, Repeat, ArrowUp, MoveRight, X, Plus, Minus } from "lucide-react";
-import Footer from "./components/Footer";
+import Footer from "../src/components/layout/Footer";
 
 type Feature = { title: string; desc: string; icon: React.ReactNode, span?: string; highlight?: boolean; };
 

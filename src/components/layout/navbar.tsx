@@ -1,52 +1,118 @@
-
 'use client';
-import {Menu, X} from "lucide-react";
-import {useState, useEffect} from "react";
+import {Home, Layers, Plus, LogOut, PanelLeft} from "lucide-react";
+import {useState} from "react";
 import Link from "next/link";
 
-function HamburgerMenu({isOpen, onClose}: {isOpen: boolean, onClose: () => void}) {
-    return (
-
-    <div className={`fixed inset-y-0 right-0 h-screen w-full md:w-64 lg:w-64 bg-white z-50 p-8 shadow-xl transition-transform duration-300 ease-in-out transform flex flex-col ${isOpen ? "translate-x-0" : "translate-x-full"}`}>
-        <menu className="flex flex-col gap-4 p-10 text-black items-center h-full text-2xl font-semibold">
-             
-            <Link href="/" className=" hover:text-white transition-colors">Home</Link>
-            <Link href="/signup" className=" hover:text-white transition-colors">Queues</Link>
-            <Link href="/login" className=" hover:text-white transition-colors">Settings</Link>
-            <Link href="/login" className=" hover:text-white transition-colors">Log out</Link>
-
-             <button onClick={onClose} className="absolute bottom-52 text-gray-400 hover:text-white hover:bg-zinc-800 p-2 rounded-full transition-colors ">
-                <X size={32} />
-            </button>
-        </menu>
-    </div>
-
-    
-
-    );
-}
-
-export function Navbar() {
-    const [isMenuOpen, setIsMenuOpen] = useState(false);
-    const openSidebar = () => {
-        setIsMenuOpen(true);
-    }
-
-    const closeSidebar = () => {
-        setIsMenuOpen(false);
-    }
-    
+export function Sidebar() {
+  const [isCollapsed, setIsCollapsed] = useState(false);
 
   return (
-    <nav className="bg-navbarBackground p-4 w-full flex items-center justify-between">
+    <aside 
+      className={`relative h-screen bg-[#0A0A0A] border-r border-white/10 flex flex-col justify-between transition-all duration-300 ease-in-out ${
+        isCollapsed ? "w-20" : "w-64"
+      }`}
+    >
+      {/* Top Section */}
+      <div className="flex flex-col w-full">
+        
+        {/* Header & Toggle */}
+        <div className={`flex items-center h-20 px-6 ${isCollapsed ? "justify-center" : "justify-between"}`}>
+          <p className={`text-white text-3xl font-bebas tracking-widest overflow-hidden transition-all duration-300 ${
+            isCollapsed ? "w-0 opacity-0" : "w-auto opacity-100"
+          }`}>
+            SMATCH
+          </p>
+          <button 
+            onClick={() => setIsCollapsed(!isCollapsed)} 
+            className="text-gray-400 hover:text-white transition-colors"
+          >
+            <PanelLeft size={20} />
+          </button>
+        </div>
 
-        <p className="text-white text-2xl font-bold font-bebas">SMATCH</p>
+        {/* Navigation Links */}
+        <div className="flex flex-col gap-2 px-4 mt-4">
+          
+          {/* Quick Start Button */}
+          <button className="flex items-center gap-3 w-full bg-white text-black p-3 rounded-lg hover:bg-gray-200 transition-colors mb-6 group font-semibold">
+            <div className="flex items-center justify-center min-w-[24px]">
+              <Plus size={20} className="text-black" />
+            </div>
+            <span className={`overflow-hidden whitespace-nowrap transition-all duration-300 ${
+              isCollapsed ? "w-0 opacity-0 hidden" : "w-auto opacity-100"
+            }`}>
+              Quick Create
+            </span>
+          </button>
 
-        <Menu className="text-white cursor-pointer" size={24} onClick={() => openSidebar()} />
+          <p className={`text-xs font-bold text-gray-500 uppercase tracking-widest mb-2 overflow-hidden whitespace-nowrap transition-all ${isCollapsed ? "hidden" : "block px-2"}`}>
+            Dashboards
+          </p>
 
-        <HamburgerMenu isOpen={isMenuOpen} onClose={closeSidebar} />
+          {/* Home (Active) */}
+          <Link 
+            href="/" 
+            className="flex items-center gap-3 w-full bg-[#008235] text-white p-3 rounded-lg transition-colors font-medium"
+          >
+            <div className="flex items-center justify-center min-w-[24px]">
+              <Home size={20} />
+            </div>
+            <span className={`overflow-hidden whitespace-nowrap transition-all duration-300 ${
+              isCollapsed ? "w-0 opacity-0 hidden" : "w-auto opacity-100"
+            }`}>
+              Home
+            </span>
+          </Link>
 
-    </nav>
-    );  
+          {/* Sessions */}
+          <Link 
+            href="/sessions" 
+            className="flex items-center gap-3 w-full text-gray-400 hover:text-white hover:bg-white/5 p-3 rounded-lg transition-colors font-medium"
+          >
+            <div className="flex items-center justify-center min-w-[24px]">
+              <Layers size={20} />
+            </div>
+            <span className={`overflow-hidden whitespace-nowrap transition-all duration-300 ${
+              isCollapsed ? "w-0 opacity-0 hidden" : "w-auto opacity-100"
+            }`}>
+              Sessions
+            </span>
+          </Link>
+
+        </div>
+      </div>
+
+      {/* Bottom Section: Profile */}
+      <div className={`transition-all duration-300 ${isCollapsed ? "p-3" : "p-4"}`}>
+        <div className={`flex items-center bg-gradient-to-br from-[#008235] to-green-800 rounded-xl transition-all duration-300 ${
+          isCollapsed ? "justify-center p-2" : "justify-between p-3 gap-3"
+        }`}>
+          
+          <div className={`flex items-center overflow-hidden transition-all duration-300 ${isCollapsed ? "gap-0" : "gap-3"}`}>
+            <div className="min-w-[36px] w-[36px] h-[36px] rounded-md bg-white/20 overflow-hidden flex-shrink-0">
+              <img 
+                src="https://github.com/ladajules.png" 
+                alt="Profile" 
+                className="w-full h-full object-cover" 
+              />
+            </div>
+            
+            <div className={`flex flex-col overflow-hidden whitespace-nowrap transition-all duration-300 ${
+              isCollapsed ? "w-0 opacity-0" : "w-auto opacity-100"
+            }`}>
+              <p className="text-white text-sm font-bold leading-tight">Jules Gimenez</p>
+              <p className="text-white/70 text-xs leading-tight">juleslada35@gmail.com</p>
+            </div>
+          </div>
+
+          {!isCollapsed && (
+            <button className="text-white/80 hover:text-white transition-colors flex-shrink-0">
+              <LogOut size={18} />
+            </button>
+          )}
+
+        </div>
+      </div>
+    </aside>
+  );
 }
-
